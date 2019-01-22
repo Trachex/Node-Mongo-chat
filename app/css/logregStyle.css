@@ -1,0 +1,230 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Raleway, arial, helvetica, sans-serif;
+}
+
+body {
+  overflow: hidden;
+  height: 100vh;
+  background-image: url("../layers/mount.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header {
+  position: absolute;
+  top: 4%;
+  color: white;
+  font-weight: 600;
+  font-size: 3vw;
+}
+
+.login {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.login:before {
+  position: absolute;
+  content: '';
+  background: inherit;
+  box-shadow: inset 0 0 0 350px rgba(255, 255, 255, 0.4);
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.login_style {
+  width: 35%;
+  height: 70%;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.login__form_style {
+  width: 80%;
+  height: 100%;
+}
+
+.login__nick_style {
+  background: inherit;
+  color: white;
+  font-size: 16px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid white;
+  height: 7%;
+  outline: none;
+}
+
+.login__nick_style::placeholder {
+  color: white;
+  font-size: 16px;
+}
+
+.login__pass_style {
+  background: inherit;
+  color: white;
+  font-size: 16px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid white;
+  height: 7%;
+  outline: none;
+}
+
+.login__pass_style::placeholder {
+  color: white;
+  font-size: 16px;
+}
+
+.login__button_style {
+  background-color: #df2359;
+  color: white;
+  border: none;
+  width: 25%;
+  height: 9%;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.login__button_style:hover {
+  background-color: #b31d47;
+  cursor: pointer;
+}
+
+.register {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.register:before {
+  position: absolute;
+  content: '';
+  background: inherit;
+  box-shadow: inset 0 0 0 350px rgba(255, 255, 255, 0.4);
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.register_style {
+  width: 35%;
+  height: 70%;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.register__form_style {
+  width: 80%;
+  height: 100%;
+}
+
+.register__nick_style {
+  background: inherit;
+  color: white;
+  font-size: 16px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid white;
+  height: 7%;
+  outline: none;
+}
+
+.register__nick_style::placeholder {
+  color: white;
+  font-size: 16px;
+}
+
+.register__pass_style {
+  background: inherit;
+  color: white;
+  font-size: 16px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid white;
+  height: 7%;
+  outline: none;
+}
+
+.register__pass_style::placeholder {
+  color: white;
+  font-size: 16px;
+}
+
+.register__name_style {
+  background: inherit;
+  color: white;
+  font-size: 16px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid white;
+  height: 7%;
+  outline: none;
+}
+
+.register__name_style::placeholder {
+  color: white;
+  font-size: 16px;
+}
+
+.register__radio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 25%;
+}
+
+.register__radio_style {
+  color: white;
+}
+
+.register__radio div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.register__button_style {
+  background-color: #df2359;
+  color: white;
+  border: none;
+  width: 40%;
+  height: 9%;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.register__button_style:hover {
+  background-color: #b31d47;
+  cursor: pointer;
+}

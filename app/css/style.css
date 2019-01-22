@@ -1,0 +1,257 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Raleway, arial, helvetica, sans-serif;
+}
+
+body {
+  overflow: hidden;
+  height: 100vh;
+  background-image: url("../layers/mount.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.chat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 70%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.chat:before {
+  position: absolute;
+  content: '';
+  background: inherit;
+  box-shadow: inset 0 0 0 350px rgba(255, 255, 255, 0.4);
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.chat__meassage-area {
+  width: 100%;
+  height: 75%;
+  overflow-y: auto;
+}
+
+.chat__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  height: 25%;
+}
+
+.chat__text {
+  background: inherit;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid white;
+  height: 20%;
+  outline: none;
+}
+
+.chat__text::placeholder {
+  color: white;
+  font-size: 16px;
+}
+
+.chat__send {
+  background-color: #df2359;
+  color: white;
+  border: none;
+  width: 25%;
+  height: 20%;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.chat__send:hover {
+  background-color: #b31d47;
+  cursor: pointer;
+}
+
+.message {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 35px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  border-bottom: 1px solid black;
+}
+
+.message__text_design {
+  font-size: 19px;
+}
+
+.message__date {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 7%;
+  right: 4%;
+  background-color: red;
+  width: 5vw;
+  height: 5vh;
+  border-radius: 5px;
+}
+
+.status__amount {
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+}
+
+.show {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 7%;
+  left: 4%;
+  width: 5vw;
+  height: 5vh;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+}
+
+.show:hover {
+  cursor: pointer;
+}
+
+.showClose {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.showClose_style {
+  width: 65%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.showClose:hover {
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.menu div {
+  margin-top: 15px;
+}
+
+.menu_style {
+  width: 35%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.menu__avatar {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.menu__avatar_style {
+  width: 40%;
+  height: 25%;
+  background-image: url("../layers/d_avatar.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.menu__nickname {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.menu__nickname_style {
+  width: 80%;
+  height: 8%;
+  color: white;
+  font-size: 22px;
+  font-weight: 400;
+  border: 1px solid white;
+}
+
+.menu__profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.menu__profile_style {
+  width: 80%;
+  height: 8%;
+  color: white;
+  font-size: 22px;
+  font-weight: 400;
+  border-bottom: 1px solid white;
+}
+
+.menu__name, .menu__sex, .menu__regdata, .menu__mAmount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: 8%;
+  color: white;
+  font-size: 22px;
+  font-weight: 400;
+  background-color: #df2359;
+  border-radius: 5px;
+}
+
+.logout {
+  position: absolute;
+  left: 4%;
+  top: 16%;
+}
+
+.logout_style {
+  width: 5vw;
+  height: 5vh;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: white;
+}
+
+.logout_style:hover {
+  cursor: pointer;
+}
