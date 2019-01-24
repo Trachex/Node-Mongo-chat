@@ -11,18 +11,17 @@ passport.use(new LocalStrategy({},
         .then((user) => {
             if (!user) return done('User  not found', null);
             else if (!user.validPassword(password, user)) return done('Password is wrong' , null);
-            else if (!user.active) return done('Unactivated user', null);
             else done(null, user);
         })
         .catch(err => done(err));
     })
 );
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
     done(null, user._id);
 });
-passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
+passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
         done(err, user);
     });
 });

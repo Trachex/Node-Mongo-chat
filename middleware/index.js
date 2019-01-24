@@ -1,6 +1,7 @@
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const passport = require('passport');
+const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
@@ -48,9 +49,9 @@ app.use((req, res) => {
     res.status(404).send('404')
 });
   
-app.use((err, req, res, next) => {
-    res.send(err);
-});
+// app.use((err, req, res, next) => {
+//     res.send(err);
+// });
   
 process.on('uncaughtException', (err) => {
     console.log(err);

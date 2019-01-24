@@ -1,2 +1,3 @@
 exports.User = require('./user');
-exports.Messages = require('./message');
+exports.Message = require('./message');
+exports.Tmp = require('./tmp');
