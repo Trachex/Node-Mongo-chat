@@ -8,6 +8,7 @@ const app = express();
 const MongoStore = require('connect-mongo')(session);
 
 require('./mongodb');
+require('./redis');
 
 const index = require('../routes');
 const config = require('../config');

@@ -1,7 +1,7 @@
 const {
-    User,
-    Tmp
+    User
 } = require('../models');
+const redis = require('redis').client;
 
 exports.index = (req, res, next) => {
     res.render('reg');
@@ -14,18 +14,7 @@ exports.logout = (req, res, next) => {
 
 exports.getId = async (req, res, next) => {
     if (!req.user) return;
-    try {
-        const check = await Tmp.findOne({ id: req.session.id });
-        if (!check) {
-            const keyValue = new Tmp({
-                id: req.session.id,
-                user: req.user.username
-            });
-            await keyValue.save();
-        }
-    } catch (err) {
-        console.log(err);
-    }
+    await redis.set(req.session.id, JSON.stringify({ user: req.user.username }));
     res.json({
         sessionId: req.session.id
     });

@@ -1,7 +1,7 @@
 const {
-    Tmp,
     Message
 } = require('../models');
+const redis = require('redis').client;
 
 module.exports = (server) => {
     const io = require('socket.io').listen(server);
@@ -11,13 +11,16 @@ module.exports = (server) => {
         socket.emit('init', initMessages);
 
         socket.on('message', async (msg) => {
-            const username = await Tmp.findOne({ id: msg.user });
+            const {
+                user
+            } = JSON.parse(await redis.get(msg.user));
+            console.log(user);
             const newMessage = new Message({
-                user: username.user,
+                user,
                 text: msg.text 
             });
             await newMessage.save();
-            msg.user = username.user;
+            msg.user = user;
             io.emit('new message', msg);
         });
         
