@@ -17,7 +17,6 @@ function sendMsg(){
 		user: localStorage.getItem('userSession'),
 		text: $('.chat__text').val()
 	}
-	
 	socket.emit('message', msg);
 	$('.chat__text').html = "";	
 }

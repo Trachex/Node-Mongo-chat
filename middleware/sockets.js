@@ -14,7 +14,6 @@ module.exports = (server) => {
             const {
                 user
             } = JSON.parse(await redis.get(msg.user));
-            console.log(user);
             const newMessage = new Message({
                 user,
                 text: msg.text 
