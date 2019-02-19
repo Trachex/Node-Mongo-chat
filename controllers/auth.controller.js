@@ -1,7 +1,6 @@
 const {
     User
 } = require('../models');
-const redis = require('redis').client;
 
 exports.index = (req, res, next) => {
     res.render('reg');
@@ -12,11 +11,10 @@ exports.logout = (req, res, next) => {
     res.redirect('/auth');
 }
 
-exports.getId = async (req, res, next) => {
-    if (!req.user) return;
-    await redis.set(req.session.id, JSON.stringify({ user: req.user.username }));
+exports.getId = (req, res) => {
     res.json({
-        sessionId: req.session.id
+        success: true,
+        id: req.user._id
     });
 }
 

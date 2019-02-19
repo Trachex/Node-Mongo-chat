@@ -3,7 +3,7 @@ window.onload = () => {
 	$('button.chat__send').click(sendMsg);
 	$('.logout').click(logOut);
 	$.ajax({ url: 'auth/getid', type: 'GET', success: (res) => {
-		localStorage.setItem('userSession', res.sessionId);
+		localStorage.setItem('id', res.id);
 	}});
 }
 
@@ -14,7 +14,7 @@ function logOut(){
 function sendMsg(){
 	if ($('.chat__text').val() == "") return;
 	const msg = {
-		user: localStorage.getItem('userSession'),
+		id: localStorage.getItem('id'),
 		text: $('.chat__text').val()
 	}
 	socket.emit('message', msg);
