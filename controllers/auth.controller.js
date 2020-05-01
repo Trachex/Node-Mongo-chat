@@ -6,7 +6,7 @@ exports.index = (req, res, next) => {
     res.render('reg');
 }
 
-exports.logout = (req, res, next) => {
+exports.logout = (req, res) => {
     req.logOut();
     res.redirect('/auth');
 }

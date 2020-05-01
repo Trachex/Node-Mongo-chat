@@ -14,7 +14,7 @@ module.exports = (server) => {
             const user = await User.findById(msg.id);
             const newMessage = new Message({
                 user: user.username,
-                text: msg.text 
+                text: msg.text
             });
             await newMessage.save();
             msg.user = user.username;

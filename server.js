@@ -5,4 +5,4 @@ const server = app.listen(config.app.port, () => {
     console.log('On');
 });
 
-const io = require('./middleware/sockets')(server);
+require('./middleware/sockets')(server);

@@ -1,4 +1,3 @@
-const cookieParser = require('cookie-parser');
 const path = require('path');
 const passport = require('passport');
 const express = require('express');
@@ -12,7 +11,6 @@ require('./mongodb');
 const index = require('../routes');
 const config = require('../config');
 
-app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -32,8 +30,8 @@ app.use(session({
     cookie: {
       path: '/',
       httpOnly: true,
-      maxAge: (7 * 24 * 60 * 60 * 1000),
-    },
+      maxAge: null,
+    }
   }));
 
 // passport needs to come after session initialization
@@ -48,10 +46,6 @@ app.use('/', index);
 app.use((req, res) => {
     res.status(404).send('404')
 });
-  
-// app.use((err, req, res, next) => {
-//     res.send(err);
-// });
   
 process.on('uncaughtException', (err) => {
     console.log(err);

@@ -8,7 +8,7 @@ window.onload = () => {
 }
 
 function logOut(){
-	fetch({ method: 'GET', url: '/auth/logout' });
+	fetch('/auth/logout', { method: 'GET' });
 }
 
 function sendMsg(){
