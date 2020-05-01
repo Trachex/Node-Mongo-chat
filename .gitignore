@@ -1,3 +1,2 @@
-gulpFile.js
-config
+config/index.js
 node_modules

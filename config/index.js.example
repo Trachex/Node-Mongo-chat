@@ -1,0 +1,14 @@
+module.exports = {
+    app: {
+        port: 3000
+    },
+    session: {
+        secret: 'secret'
+    },
+    database: {
+        uri: 'mongodb://localhost:27017/test',
+        options: {
+
+        }
+    }
+}
