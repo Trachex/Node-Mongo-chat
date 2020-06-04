@@ -2,19 +2,19 @@ let socket = io();
 window.onload = () => {
 	$('button.chat__send').click(sendMsg);
 	$('.logout').click(logOut);
-	$.ajax({ url: 'auth/getid', type: 'GET', success: (res) => {
-		localStorage.setItem('id', res.id);
-	}});
+	const check = localStorage.getItem('token');
+	if (!check) window.location.href = '/auth';
 }
 
 function logOut(){
-	fetch('/auth/logout', { method: 'GET' });
+	localStorage.removeItem('token');
+	window.location.href = '/auth';
 }
 
 function sendMsg(){
 	if ($('.chat__text').val() == "") return;
 	const msg = {
-		id: localStorage.getItem('id'),
+		token: localStorage.getItem('token'),
 		text: $('.chat__text').val()
 	}
 	socket.emit('message', msg);

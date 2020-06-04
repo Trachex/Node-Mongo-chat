@@ -7,14 +7,14 @@ html
   body
     header.header Log in or Register
     .login.login_style
-      form.login__form.login__form_style(autocomplete='off', method='POST', action='/auth/login')
+      form.login__form.login__form_style(autocomplete='off')
         input.login__nick_style(type='text', placeholder='Enter your login (Nickname)', name='username')
         input.login__pass_style(type='password', placeholder='Enter your password', name='password')
-        button.login__button_style(type='submit') Log in
+        button.login__button_style(type='button') Log in
     .register.register_style
       form.register__form.register__form_style(autocomplete='off')
         input.register__nick_style(type='text', placeholder='Enter your nickname', name='username')
         input.register__pass_style(type='password', placeholder='Enter your password', name='password')
         button.register__button_style(type='button') Register now!
-    script(type='text/javascript', src='../js/logregScript.js')
+    script(type='text/javascript', src='../js/auth.js')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')

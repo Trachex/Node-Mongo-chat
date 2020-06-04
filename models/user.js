@@ -27,7 +27,7 @@ userSchema.methods.validPassword = (pass, user) => {
 	return user.hash === hashcheck;
 };
 
-userSchema.methods.generateJWT = () => {
+userSchema.methods.generateJWT = function() {
     return jwt.sign({
         id: this._id
     }, config.jwt.secret);
