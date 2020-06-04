@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
 const {
-    web
+    chat
 } = require('../controllers');
 
-router.get('/', web.index);
+router.get('/', chat.index);
 
 module.exports = router;

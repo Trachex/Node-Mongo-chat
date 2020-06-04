@@ -3,23 +3,49 @@ const {
 } = require('../models');
 
 exports.index = (req, res, next) => {
-    res.render('reg');
+    res.render('auth');
 }
 
-exports.logout = (req, res) => {
-    req.logOut();
-    res.redirect('/auth');
-}
+exports.login = async (req, res) => {
+    const {
+        username,
+        password
+    } = req.body;
 
-exports.getId = (req, res) => {
-    res.json({
-        success: true,
-        id: req.user._id
-    });
-}
+    if (!username || !password) {
+        return res.json({
+            success: false,
+            text: 'Not enougth parameters'
+        })
+    }
 
-exports.login = (req, res) => {
-    res.redirect('/');
+    try {
+        const user = await User.findOne({ username });
+
+        if (!user) return res.json({
+            success: false,
+            text: 'User not found'
+        });
+
+        if (!user.validPassword(password, user)) res.json({
+            success: false,
+            text: 'Password is wrong'
+        });
+
+        const token = user.generateJWT();
+
+        res.json({
+            success: true,
+            token
+        });
+
+    } catch (err) {
+        console.log(err);
+        return res.json({
+            success: false,
+            text: 'Something went wrong'
+        });
+    }
 }
 
 exports.registration = async (req, res) => {

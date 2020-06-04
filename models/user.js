@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -17,11 +19,18 @@ userSchema.methods.setPassword = function(password) {
     hashTemp.update(password);
     this.hash = hashTemp.digest('hex');
 };
-userSchema.methods.validPassword = function(pass, user) {
+
+userSchema.methods.validPassword = (pass, user) => {
     let hashtemp = crypto.createHmac('sha512', user.salt);
     hashtemp.update(pass);
     let hashcheck = hashtemp.digest('hex');
 	return user.hash === hashcheck;
+};
+
+userSchema.methods.generateJWT = () => {
+    return jwt.sign({
+        id: this._id
+    }, config.jwt.secret);
 };
 
 module.exports = mongoose.model('Users', userSchema);

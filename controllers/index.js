@@ -1,3 +1,3 @@
-exports.web = require('./web.controller');
+exports.chat = require('./chat.controller');
 exports.auth = require('./auth.controller');
-exports.socketio = require('./socket.controller');
+exports.socketHandler = require('./socket.controller');

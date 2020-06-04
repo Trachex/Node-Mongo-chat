@@ -1,14 +1,14 @@
 const {
-    socketio
+    socketHandler
 } = require('../controllers');
 
 module.exports = (server) => {
     const io = require('socket.io').listen(server);
 
     io.on('connection', async (socket) => {
-        await socketio.init(socket);
+        await socketHandler.init(socket);
 
-        socket.on('message', msg => socketio.message(io, msg));
+        socket.on('message', msg => socketHandler.message(io, msg));
     });
 
 }
