@@ -5,12 +5,17 @@ html
     meta(charset='utf-8')
     link(rel='stylesheet', type='text/css', href='../css/style.css')
   body
-    .chat
-      ul.chat__meassage-area
-      form.chat__form(autocomplete='off')
-        textarea.chat__text(name='text', placeholder='Type your message')
-        button.chat__send(type='button') Send
+    div.roomList
+      each r in rooms
+        p.roomName #{r.name}
+        a.link(href=`/${r.name}`) Join
+
+    form.createRoom(autocomplete='off')
+      input.name(placeholder='Room name')
+      button.create(type='button') Create new Room
+
     .logout.logout_style Log out
+
     script(src='/socket.io/socket.io.js')
-    script(type='text/javascript', src='../js/script.js')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(type='text/javascript', src='../js/script.js')

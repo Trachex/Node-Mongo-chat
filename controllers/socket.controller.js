@@ -3,34 +3,52 @@ const config = require('../config');
 
 const {
     Message,
-    User
+    User,
+    Room
 } = require('../models');
 
-exports.init = async socket => {
-    const initMessages = await Message.find({});
-    socket.emit('init', initMessages);
+exports.newUser = async (socket, msg, io) => {
+    const { room, token } = msg;
+
+    try {
+        const decoded = jwt.verify(token, config.jwt.secret);
+
+        const check = await Room.findOne({ name: room });
+        if (!check) return;
+
+        const user = await User.findById(decoded.id);
+        const msg = await Message.find({ room });
+
+        socket.join(room);
+        socket.emit('newUserInit', msg);
+
+        io.sockets.in(room).emit('userConnect', { user: user.username });
+
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 exports.message = async (io, msg) => {
+    const { room, text, token } = msg;
+
     try {
-        const decoded = jwt.verify(msg.token, config.jwt.secret);
+        const decoded = jwt.verify(token, config.jwt.secret);
 
         const user = await User.findById(decoded.id);
 
         const newMessage = new Message({
             user: user.username,
-            text: msg.text
+            text,
+            room
         });
 
         await newMessage.save();
 
-        const newMsg = {
-            text: msg.text,
-            user: user.username
-        };
-        io.emit('new message', newMsg);
+        io.sockets.in(room).emit('newMessage', { user: user.username, text });
 
     } catch (err) {
         console.log(err);
     }
+
 }

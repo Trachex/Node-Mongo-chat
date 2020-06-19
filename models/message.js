@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
-    user:{
+    user: {
         type: String,
         required: true
     },
-    text:{
+    text: {
         type: String,
         required: true,
+    },
+    room: {
+        type: String
     }
 });
 
