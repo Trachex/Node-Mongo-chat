@@ -9,5 +9,7 @@ module.exports = server => {
         socket.on('newUser', msg => { socketHandler.newUser(socket, msg, io) });
     
         socket.on('message', msg => { socketHandler.message(io, msg) });
+
+        socket.on('createRoom', msg => { socketHandler.createRoom(io, msg) });
     });
 }

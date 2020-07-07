@@ -6,6 +6,5 @@ const {
 
 router.get('/', chat.index);
 router.get('/:room', chat.room);
-router.post('/create', chat.createRoom);
 
 module.exports = router;

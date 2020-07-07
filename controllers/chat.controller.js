@@ -26,26 +26,3 @@ exports.room = async (req, res) => {
 
     res.render('room', { name });
 }
-
-exports.createRoom = async (req, res) => {
-    const { name, token } = req.body;
-
-    if (!name || !token) return;
-
-    try {
-        const decoded = jwt.verify(token, config.jwt.secret);
-
-        const check = await Room.findOne({ name });
-
-        if (check) return res.json({ success: false, text: 'Room name already taken' });
-
-        const newRoom = new Room({ name, owner: decoded.id });
-        await newRoom.save();
-
-    } catch(err) {
-        console.log(err);
-        res.json({ succsess: false, text: 'Something went wrong' });
-    }
-
-    res.json({ succsess: true });
-}

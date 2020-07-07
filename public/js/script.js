@@ -15,9 +15,12 @@ function createRoom() {
 	const name = $('input.name').val();
 	if (!name) return;
 
-	const data = JSON.stringify({ name, token: localStorage.getItem('token') });
-
-	$.ajax({ url: 'create', type:'POST', data, contentType: 'application/json', success: res => {
-		if (res.success === false) alert(res.text);
-	}});
+	socket.emit('createRoom', { name, token: localStorage.getItem('token') });
 }
+
+socket.on('newRoom', msg => {
+	$('div.roomList').append($(`
+		<p class="roomName">${msg.name}</p>	
+		<a href="/${msg.name}">Join</a>
+	`));
+});
