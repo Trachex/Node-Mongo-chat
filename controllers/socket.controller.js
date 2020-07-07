@@ -21,6 +21,7 @@ exports.newUser = async (socket, msg, io) => {
 
         socket.join(room);
         socket.emit('newUserInit', msg);
+        socket.user = user.username;
 
         io.sockets.in(room).emit('userConnect', { user: user.username });
 

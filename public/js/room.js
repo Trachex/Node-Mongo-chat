@@ -12,6 +12,10 @@ socket.on('userConnect', msg => {
 	$('div.meassageArea').append(`${msg.user} Connected to the Chat`);
 });
 
+socket.on('userDisconnect', msg => {
+	$('div.meassageArea').append(`${msg.user} Disconnected`);
+})
+
 socket.on('newUserInit', msg => {
 	for (let i = 0; i < msg.length; i++) {
 		appendMessage(msg[i]);
