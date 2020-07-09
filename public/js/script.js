@@ -20,7 +20,13 @@ function createRoom() {
 
 socket.on('newRoom', msg => {
 	$('div.roomList').append($(`
-		<p class="roomName">${msg.name}</p>	
-		<a href="/${msg.name}">Join</a>
+		<div class="room">
+			<p class="roomName">${msg.name}</p>	
+			<a class="link" href="/${msg.name}">Join</a>
+		</div>
 	`));
 });
+
+function showError(text) {
+	
+}

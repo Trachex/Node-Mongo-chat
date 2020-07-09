@@ -49,3 +49,7 @@ function appendMessage(data) {
 		</li>`
 	));
 }
+
+function showError(text) {
+	
+}
