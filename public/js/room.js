@@ -23,18 +23,17 @@ socket.on('newUserInit', msg => {
 });
 
 socket.on('newMessage', msg => {
-	console.log(msg);
 	appendMessage(msg);
 });
 
 function send() {
 	const text = $('input.textarea').val();
 
-	if (!text) return;
+	if (!text) return alert('No message text');
 
 	socket.emit('message', { text, token: localStorage.getItem('token'), room: roomName });
 
-	$('input.textarea').html = "";	
+	$('input.textarea').val("");	
 }
 
 function appendMessage(data) {
@@ -48,8 +47,4 @@ function appendMessage(data) {
 			</p>
 		</li>`
 	));
-}
-
-function showError(text) {
-	
 }

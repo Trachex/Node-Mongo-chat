@@ -13,9 +13,11 @@ function logOut() {
 
 function createRoom() {
 	const name = $('input.name').val();
-	if (!name) return;
+	if (!name) return alert('No room  name');
 
 	socket.emit('createRoom', { name, token: localStorage.getItem('token') });
+
+	$('input.name').val("");
 }
 
 socket.on('newRoom', msg => {
@@ -27,6 +29,3 @@ socket.on('newRoom', msg => {
 	`));
 });
 
-function showError(text) {
-	
-}

@@ -6,7 +6,7 @@ window.onload = () => {
 async function register() {
 	const username = $('input.register__nick_style').val();
 	const password = $('input.register__pass_style').val();
-	if(username == "" || password == "") return;
+	if(username == "" || password == "") return alert('No username or password');
 	
 	const data = JSON.stringify({
 		username,
@@ -23,7 +23,7 @@ async function register() {
 async function logIn() {
 	const username = $('input.login__nick_style').val();
 	const password = $('input.login__pass_style').val();
-	if(username == "" || password == "") return;
+	if(username == "" || password == "") return alert('No username or password');
 	
 	const data = JSON.stringify({
 		username,
