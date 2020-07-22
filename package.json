@@ -3,7 +3,7 @@
   "scripts": {
     "start": "node server",
     "dev": "nodemon server",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
