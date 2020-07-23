@@ -42,9 +42,8 @@ describe('newUser tests', () => {
             join: jest.fn(),
             emit: jest.fn()
         };
-        // const emit = jest.fn();
-        const io = { sockets: { in: jest.fn() } };
-        // io.sockets.in.mockReturnValueOnce(emit);
+        const emit = { emit: jest.fn()}
+        const io = { sockets: { in: jest.fn().mockReturnValueOnce(emit) } };
 
         const testRoom = new Room({ name: msg.room });
         await testRoom.save();
@@ -63,7 +62,7 @@ describe('newUser tests', () => {
         expect(socket.emit).toBeCalledWith('newUserInit', testMsg);
         expect(socket.user).toBe(testUser.username);
         expect(io.sockets.in).toBeCalledWith(msg.room);
-        // expect(emit).toBeCalledWith('userConnect', { user: testUser.username });
+        expect(emit.emit).toBeCalledWith('userConnect', { user: testUser.username });
     });
 });
 
@@ -102,9 +101,8 @@ describe('message tests', () => {
         await testUser.save();
         msg.token = testUser.generateJWT();
 
-        // const emit = jest.fn();
-        const io = { sockets: { in: jest.fn() } };
-        // io.sockets.in.mockReturnValueOnce(emit);
+        const emit = { emit: jest.fn()}
+        const io = { sockets: { in: jest.fn().mockReturnValueOnce(emit) } };
 
         await socketHandler.message(io, msg);
 
@@ -113,7 +111,7 @@ describe('message tests', () => {
         expect(io.sockets.in).toBeCalledWith(msg.room);
         expect(check.user).toBe(testUser.username);
         expect(check.text).toBe(msg.text);
-        // expect(emit).toBeCalledWith('newMessage', { user: testUser.username, msg.text });
+        expect(emit.emit).toBeCalledWith('newMessage', { user: testUser.username, text: msg.text });
     });
 });
 
