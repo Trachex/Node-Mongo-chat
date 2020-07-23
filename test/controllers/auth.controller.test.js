@@ -58,7 +58,7 @@ describe('Login tests', () => {
 
         await auth.login(req, res);
 
-        expect(res.json).toHaveBeenCalledWith({ success: false, text: 'Not enougth parameters' });
+        expect(res.json).toHaveBeenCalledWith({ success: false, text: 'Not enough parameters' });
     });
 
     test('should throw when user not found', async () => {
@@ -145,7 +145,7 @@ describe('Registration tests', () => {
 
         await auth.registration(req, res);
 
-        expect(res.json).toHaveBeenCalledWith({ success: false, text: 'Not enougth parameters' });
+        expect(res.json).toHaveBeenCalledWith({ success: false, text: 'Not enough parameters' });
     });
 
     test('should throw when username already taken', async () => {
