@@ -42,7 +42,7 @@ describe('newUser tests', () => {
             join: jest.fn(),
             emit: jest.fn()
         };
-        const emit = { emit: jest.fn()}
+        const emit = { emit: jest.fn() }
         const io = { sockets: { in: jest.fn().mockReturnValueOnce(emit) } };
 
         const testRoom = new Room({ name: msg.room });
@@ -63,6 +63,50 @@ describe('newUser tests', () => {
         expect(socket.user).toBe(testUser.username);
         expect(io.sockets.in).toBeCalledWith(msg.room);
         expect(emit.emit).toBeCalledWith('userConnect', { user: testUser.username });
+    });
+
+    test('should throw when not enough parameters', async () => {
+        const msg = {};
+        const socket = {
+            emit: jest.fn()
+        };
+
+        await socketHandler.newUser(socket, msg);
+
+        expect(socket.emit).toBeCalledWith('error', { text: 'Not enough parameters' });
+    });
+
+    test('should throw when token is invalid', async () => {
+        const msg = {
+            room: 'test',
+            token: 'invalid'
+        };
+        const socket = {
+            emit: jest.fn()
+        };
+
+        await socketHandler.newUser(socket, msg);
+
+        expect(socket.emit).toBeCalledWith('error', { text: 'jwt malformed' });
+    });
+
+    test('should throw when room doesn`t exist', async () => {
+        const msg = {
+            room: 'test'
+        };
+        const socket = {
+            emit: jest.fn()
+        };
+
+        const testUser = new User({
+            username: 'test'
+        });
+        await testUser.save();
+        msg.token = testUser.generateJWT();
+
+        await socketHandler.newUser(socket, msg);
+
+        expect(socket.emit).toBeCalledWith('error', { text: 'Such room does not exist' });
     });
 });
 
@@ -113,9 +157,35 @@ describe('message tests', () => {
         expect(check.text).toBe(msg.text);
         expect(emit.emit).toBeCalledWith('newMessage', { user: testUser.username, text: msg.text });
     });
+
+    test('should throw when not enough parameters', async () => {
+        const msg = {};
+        const socket = {
+            emit: jest.fn()
+        };
+
+        await socketHandler.message({}, msg, socket);
+
+        expect(socket.emit).toBeCalledWith('error', { text: 'Not enough parameters' });
+    });
+
+    test('should throw when token is invalid', async () => {
+        const msg = {
+            room: 'test',
+            text: 'none',
+            token: 'invalid'
+        };
+        const socket = {
+            emit: jest.fn()
+        };
+
+        await socketHandler.message({}, msg, socket);
+
+        expect(socket.emit).toBeCalledWith('error', { text: 'jwt malformed' });
+    });
 });
 
-describe('message tests', () => {
+describe('createRoom tests', () => {
 
     beforeAll(async () => {
         await mongoose.connect('mongodb://localhost:27017', 
@@ -157,5 +227,53 @@ describe('message tests', () => {
         expect(check.name).toBe(msg.name);
         expect(check.owner).toBe(`${testUser._id}`);
         expect(io.emit).toBeCalledWith('newRoom', { name: msg.name });
+    });
+
+    test('should throw when not enough parameters', async () => {
+        const msg = {};
+        const socket = {
+            emit: jest.fn()
+        };
+
+        await socketHandler.createRoom({}, msg, socket);
+
+        expect(socket.emit).toBeCalledWith('error', { text: 'Not enough parameters' });
+    });
+
+    test('should throw when token is invalid', async () => {
+        const msg = {
+            name: 'sample',
+            token: 'invalid'
+        };
+        const socket = {
+            emit: jest.fn()
+        };
+
+        await socketHandler.createRoom({}, msg, socket);
+
+        expect(socket.emit).toBeCalledWith('error', { text: 'jwt malformed' });
+    });
+
+    test('should throw when room name already taken', async () => {
+        const msg = {
+            name: 'sample',
+        };
+        const socket = {
+            emit: jest.fn()
+        };
+
+        const testUser = new User({
+            username: 'test'
+        });
+        await testUser.save();
+        msg.token = testUser.generateJWT();
+        const takenRoom = new Room({
+            name: msg.name
+        });
+        await takenRoom.save();
+
+        await socketHandler.createRoom({}, msg, socket);
+
+        expect(socket.emit).toBeCalledWith('error', { text: 'Room name already taken' });
     });
 });
