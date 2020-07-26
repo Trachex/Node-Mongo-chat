@@ -9,7 +9,7 @@ html
       each r in rooms
         div.room
           p.roomName #{r.name}
-          a.link(href=`/${r.name}`) Join
+          a.link(href=`/room/${r.name}`) Join
 
     input.name(placeholder='Room name')
     button.create(type='button') Create new Room
