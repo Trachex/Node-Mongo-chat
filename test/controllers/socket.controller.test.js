@@ -73,7 +73,7 @@ describe('newUser tests', () => {
 
         await socketHandler.newUser(socket, msg);
 
-        expect(socket.emit).toBeCalledWith('error', { text: 'Not enough parameters' });
+        expect(socket.emit).toBeCalledWith('serverError', { text: 'Not enough parameters' });
     });
 
     test('should throw when token is invalid', async () => {
@@ -87,7 +87,7 @@ describe('newUser tests', () => {
 
         await socketHandler.newUser(socket, msg);
 
-        expect(socket.emit).toBeCalledWith('error', { text: 'jwt malformed' });
+        expect(socket.emit).toBeCalledWith('serverError', { text: 'jwt malformed' });
     });
 
     test('should throw when room doesn`t exist', async () => {
@@ -106,7 +106,7 @@ describe('newUser tests', () => {
 
         await socketHandler.newUser(socket, msg);
 
-        expect(socket.emit).toBeCalledWith('error', { text: 'Such room does not exist' });
+        expect(socket.emit).toBeCalledWith('serverError', { text: 'Such room does not exist' });
     });
 });
 
@@ -166,7 +166,7 @@ describe('message tests', () => {
 
         await socketHandler.message({}, msg, socket);
 
-        expect(socket.emit).toBeCalledWith('error', { text: 'Not enough parameters' });
+        expect(socket.emit).toBeCalledWith('serverError', { text: 'Not enough parameters' });
     });
 
     test('should throw when token is invalid', async () => {
@@ -181,7 +181,7 @@ describe('message tests', () => {
 
         await socketHandler.message({}, msg, socket);
 
-        expect(socket.emit).toBeCalledWith('error', { text: 'jwt malformed' });
+        expect(socket.emit).toBeCalledWith('serverError', { text: 'jwt malformed' });
     });
 });
 
@@ -237,7 +237,7 @@ describe('createRoom tests', () => {
 
         await socketHandler.createRoom({}, msg, socket);
 
-        expect(socket.emit).toBeCalledWith('error', { text: 'Not enough parameters' });
+        expect(socket.emit).toBeCalledWith('serverError', { text: 'Not enough parameters' });
     });
 
     test('should throw when token is invalid', async () => {
@@ -251,7 +251,7 @@ describe('createRoom tests', () => {
 
         await socketHandler.createRoom({}, msg, socket);
 
-        expect(socket.emit).toBeCalledWith('error', { text: 'jwt malformed' });
+        expect(socket.emit).toBeCalledWith('serverError', { text: 'jwt malformed' });
     });
 
     test('should throw when room name already taken', async () => {
@@ -274,6 +274,6 @@ describe('createRoom tests', () => {
 
         await socketHandler.createRoom({}, msg, socket);
 
-        expect(socket.emit).toBeCalledWith('error', { text: 'Room name already taken' });
+        expect(socket.emit).toBeCalledWith('serverError', { text: 'Room name already taken' });
     });
 });
